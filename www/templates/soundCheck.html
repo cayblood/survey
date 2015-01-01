@@ -1,0 +1,22 @@
+<ion-pane>
+  <ion-header-bar class="bar-stable">
+    <h1 class="title">Sound Check</h1>
+  </ion-header-bar>
+  <ion-content padding="10">
+    <p>
+      You should currently be hearing music. If you are not, please adjust the volume on your speakers or headphones until you can hear the music clearly.
+    </p>
+
+    <li class="item item-checkbox item-text-wrap">
+      <label class="checkbox">
+        <input type="checkbox" name="consent" ng-model="ctl.consent">
+      </label>
+      I can hear the music
+    </li>
+
+    <button class="button button-block button-calm" ng-disabled="!ctl.consent" ng-click="ctl.next()">
+      Continue
+    </button>
+
+  </ion-content>
+</ion-pane>

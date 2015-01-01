@@ -1,0 +1,33 @@
+<ion-pane>
+  <ion-header-bar class="bar-stable">
+    <h1 class="title">Introduction</h1>
+  </ion-header-bar>
+  <ion-content padding="10">
+    <h3>Testing the influence of music on task completion speed</h3>
+
+    <p>
+      This is an experiment to determine the effect of music on task completion speed. I am conducting this experiment
+      as part of a science project for my 8th grade science class. Thank you for your willingness to participate.
+    </p>
+
+    <p>You will be presented with four pages, each of which contains six simple questions. Music will be played during
+      some of these pages. Please answer the questions to the best of your ability. This experiment should take
+      approximately five minutes to complete.</p>
+
+    <p>If you are under the age of 18, I am required to obtain your parents' or guardians' permission for you to
+      participate in the experiment.</p>
+
+    <li class="item item-checkbox item-text-wrap">
+      <label class="checkbox">
+        <input type="checkbox" name="consent" ng-model="ctl.consent">
+      </label>
+      I certify that I am at least 18 years old or that I have obtained my parents' permission to participate in this
+      experiment.
+    </li>
+
+    <button class="button button-block button-calm" ng-disabled="!ctl.consent" ng-click="ctl.next()">
+      Continue
+    </button>
+
+  </ion-content>
+</ion-pane>
