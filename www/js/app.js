@@ -3,6 +3,26 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
+
+function loadSounds() {
+  var loopFunc = function () {
+    this.currentTime = 0;
+    this.play();
+  };
+  window.testSound = new Audio("sounds/test.mp3");
+  window.testSound.preload = 'auto';
+  window.testSound.addEventListener('ended', loopFunc, false);
+  window.slowSound = new Audio("sounds/slow.mp3");
+  window.slowSound.preload = 'auto';
+  window.slowSound.addEventListener('ended', loopFunc, false);
+  window.mediumSound = new Audio("sounds/medium.mp3");
+  window.mediumSound.preload = 'auto';
+  window.mediumSound.addEventListener('ended', loopFunc, false);
+  window.fastSound = new Audio("sounds/fast.mp3");
+  window.fastSound.preload = 'auto';
+  window.fastSound.addEventListener('ended', loopFunc, false);
+}
+
 angular.module('starter', ['ionic'])
 .factory('storageService', function () {
   var formData = {};
@@ -28,6 +48,7 @@ angular.module('starter', ['ionic'])
   $urlRouterProvider.otherwise('/page/intro');
 })
 .run(function($rootScope, $ionicPlatform) {
+  loadSounds();
   function shuffle(o) {
     for (var j, x, i = o.length; i; j = Math.floor(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
     return o;
@@ -80,21 +101,21 @@ angular.module('starter', ['ionic'])
       return false;
     };
 
-    $scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
-      var index = self.order.indexOf(toParams.pageId), previousPageId;
-      if (toParams.pageId === 'intro') {
-        storageService.resetData();
-      }
-      if (index > 0) {
-        previousPageId = self.order[index - 1];
-      }
-      if (previousPageId && self.songs[previousPageId]) {
-        window[self.songs[previousPageId] + 'Sound'].pause();
-      }
-      if (self.songs[toParams.pageId]) {
-        window[self.songs[toParams.pageId] + 'Sound'].play();
-      }
-    });
+    //$scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
+    //  var index = self.order.indexOf(toParams.pageId), previousPageId;
+    //  if (toParams.pageId === 'intro') {
+    //    storageService.resetData();
+    //  }
+    //  if (index > 0) {
+    //    previousPageId = self.order[index - 1];
+    //  }
+    //  if (previousPageId && self.songs[previousPageId]) {
+    //    window[self.songs[previousPageId] + 'Sound'].pause();
+    //  }
+    //  if (self.songs[toParams.pageId]) {
+    //    window[self.songs[toParams.pageId] + 'Sound'].play();
+    //  }
+    //});
 
     self.submitData = function () {
       var resultsRef = new Firebase('https://james-survey.firebaseio.com/results'),
@@ -116,6 +137,15 @@ angular.module('starter', ['ionic'])
         index = self.order.indexOf(pageId),
         nextPageId = self.order[index + 1],
         currentData = storageService.getData();
+
+      window.testSound.pause();
+      window.slowSound.pause();
+      window.mediumSound.pause();
+      window.fastSound.pause();
+
+      if (self.songs[nextPageId]) {
+        window[self.songs[nextPageId] + 'Sound'].play();
+      }
 
       if (['one', 'two', 'three', 'four', 'thanks'].indexOf(nextPageId) !== -1) {
         if (currentData.timings === undefined) {
