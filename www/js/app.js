@@ -122,6 +122,7 @@ angular.module('starter', ['ionic'])
         attributes = {}, currentData = storageService.getData();
       attributes = {
         createdAt: Firebase.ServerValue.TIMESTAMP,
+        agentString: navigator.userAgent,
         oneElapsedTime: currentData.timings[1] - currentData.timings[0],
         twoElapsedTime: currentData.timings[2] - currentData.timings[1],
         threeElapsedTime: currentData.timings[3] - currentData.timings[2],
