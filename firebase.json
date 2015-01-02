@@ -1,0 +1,9 @@
+{
+  "firebase": "james-survey",
+  "public": "www",
+  "ignore": [
+    "firebase.json",
+    "**/.*",
+    "**/node_modules/**"
+  ]
+}

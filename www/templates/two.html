@@ -1,7 +1,8 @@
-<ion-pane>
-  <ion-header-bar class="bar-stable">
-    <h1 class="title">Section Two of Four</h1>
-  </ion-header-bar>
+<form role="form" name="ctl.formTwo">
+  <ion-pane>
+    <ion-header-bar class="bar-stable">
+      <h1 class="title">Section Two of Four</h1>
+    </ion-header-bar>
     <ion-content padding="10">
       <p>Please answer the following questions to the best of your ability.
         There is no penalty for wrong answers.
@@ -13,11 +14,57 @@
         </div>
         <label class="item item-input item-text-wrap item-stacked-label">
           <strong>An eye for an eye makes the whole world blind.<strong>
-            <input type="text" ng-model="oneSentence" placeholder="Type here" required="required">
+            <input type="text" ng-model="ctl.twoSentence" placeholder="Type here" required="required">
         </label>
       </div>
-      <button class="button button-block button-calm" ng-click="ctl.next()">
+
+      <div class="list card">
+        <div class="item item-divider">
+          Choose the option that best describes the image
+        </div>
+        <label class="item item-input item-text-wrap item-stacked-label">
+          <img src="img/wheel.svg" width="150" height="150"/>
+          <ion-radio ng-model="ctl.twoDrawing" ng-value="'circle'" required="required">Circular</ion-radio>
+          <ion-radio ng-model="ctl.twoDrawing" ng-value="'color'" required="required">Colorful</ion-radio>
+          <ion-radio ng-model="ctl.twoDrawing" ng-value="'square'" required="required">Square</ion-radio>
+          <ion-radio ng-model="ctl.twoDrawing" ng-value="'triangle'" required="required">Triangular</ion-radio>
+        </label>
+      </div>
+
+      <div class="list card">
+        <div class="item item-divider">
+          Please perform the following math operation
+        </div>
+        <label class="item item-input">
+          <span class="input-label">34 - 29 =</span>
+          <input type="text" ng-model="ctl.twoMath" placeholder="Type here" required="required">
+        </label>
+      </div>
+
+      <div class="list card">
+        <div class="item item-divider">
+          Which of the following statements is true?
+        </div>
+        <label class="item item-input item-text-wrap item-stacked-label">
+          <ion-radio ng-model="ctl.twoChoice" ng-value="'a'" required="required">|2| = 2</ion-radio>
+          <ion-radio ng-model="ctl.twoChoice" ng-value="'b'" required="required">3<sup>-1</sup> = -3</ion-radio>
+          <ion-radio ng-model="ctl.twoChoice" ng-value="'c'" required="required">49 / 7 = 9</ion-radio>
+          <ion-radio ng-model="ctl.twoChoice" ng-value="'d'" required="required">all of the above</ion-radio>
+        </label>
+      </div>
+
+      <div class="list card">
+        <div class="item item-divider">
+          Please type the letter L 27 times in the space below.
+        </div>
+        <label class="item item-input item-text-wrap item-stacked-label">
+            <input type="text" ng-model="ctl.twoWord" placeholder="Type here" required="required">
+        </label>
+      </div>
+
+      <button class="button button-block button-calm" ng-disabled="!ctl.canContinue()" ng-click="ctl.next()">
         Continue
       </button>
     </ion-content>
-</ion-pane>
+  </ion-pane>
+</form>

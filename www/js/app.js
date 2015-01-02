@@ -4,7 +4,21 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 angular.module('starter', ['ionic'])
+.factory('storageService', function () {
+  var formData = {};
 
+  return {
+    getData: function () {
+      return formData;
+    },
+    setData: function (newFormData) {
+      formData = newFormData
+    },
+    resetData: function () {
+      formData = {};
+    }
+  };
+})
 .config(function($stateProvider, $urlRouterProvider) {
   $stateProvider.state('pages', {
     url: "/page/:pageId",
@@ -18,7 +32,7 @@ angular.module('starter', ['ionic'])
     for (var j, x, i = o.length; i; j = Math.floor(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
     return o;
   }
-  $rootScope.songOrder = shuffle([null, 'slow', 'medium', 'fast']);
+  $rootScope.songOrder = shuffle([0, 'slow', 'medium', 'fast']);
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -30,7 +44,7 @@ angular.module('starter', ['ionic'])
     }
   });
 })
-.controller('SurveyCtrl', function($location, $stateParams, $rootScope) {
+.controller('SurveyCtrl', function($location, $stateParams, $rootScope, $scope, storageService) {
     var self = this;
     self.order = ['intro', 'soundCheck', 'one', 'two', 'three', 'four', 'thanks'];
     self.songs = {
@@ -57,22 +71,66 @@ angular.module('starter', ['ionic'])
         if (self.formOne.$valid && self.timesClicked === self.timesToClick) {
           return true;
         }
+      } else if (['two', 'three', 'four'].indexOf($stateParams.pageId) !== -1) {
+        var pageName = $stateParams.pageId.charAt(0).toUpperCase() + $stateParams.pageId.slice(1);
+        if (self['form' + pageName].$valid) {
+          return true;
+        }
       }
       return false;
+    };
+
+    $scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
+      var index = self.order.indexOf(toParams.pageId), previousPageId;
+      if (toParams.pageId === 'intro') {
+        storageService.resetData();
+      }
+      if (index > 0) {
+        previousPageId = self.order[index - 1];
+      }
+      if (previousPageId && self.songs[previousPageId]) {
+        window[self.songs[previousPageId] + 'Sound'].pause();
+      }
+      if (self.songs[toParams.pageId]) {
+        window[self.songs[toParams.pageId] + 'Sound'].play();
+      }
+    });
+
+    self.submitData = function () {
+      var resultsRef = new Firebase('https://james-survey.firebaseio.com/results'),
+        attributes = {}, currentData = storageService.getData();
+      attributes = {
+        createdAt: Firebase.ServerValue.TIMESTAMP,
+        oneElapsedTime: currentData.timings[1] - currentData.timings[0],
+        twoElapsedTime: currentData.timings[2] - currentData.timings[1],
+        threeElapsedTime: currentData.timings[3] - currentData.timings[2],
+        fourElapsedTime: currentData.timings[4] - currentData.timings[3],
+        songOrder: $rootScope.songOrder
+      };
+      for (var attrname in currentData) { attributes[attrname] = currentData[attrname]; }
+      resultsRef.push(attributes);
     };
 
     self.next = function () {
       var pageId = $stateParams.pageId,
         index = self.order.indexOf(pageId),
-        nextPageId = self.order[index + 1];
-      if (self.songs[pageId]) {
-        createjs.Sound.stop(self.songs[pageId]);
-      }
-      if (self.songs[nextPageId]) {
-        createjs.Sound.play(self.songs[nextPageId], {loop: -1});
-      }
+        nextPageId = self.order[index + 1],
+        currentData = storageService.getData();
+
       if (['one', 'two', 'three', 'four', 'thanks'].indexOf(nextPageId) !== -1) {
-        self.timings.push(new Date().getTime() / 1000);
+        if (currentData.timings === undefined) {
+          currentData.timings = [];
+        }
+        currentData.timings.push(new Date().getTime() / 1000);
+      }
+      if (['one', 'two', 'three', 'four'].indexOf(pageId) !== -1) {
+        ['Sentence', 'Drawing', 'Math', 'Choice', 'Word'].forEach(function (item) {
+          currentData[pageId + item] = self[pageId + item];
+        });
+      }
+      storageService.setData(currentData);
+      if (nextPageId === 'thanks') {
+        self.submitData();
       }
       $location.path('/page/' + self.order[index + 1]);
     };

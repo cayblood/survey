@@ -1,10 +1,70 @@
-<ion-pane>
-  <ion-header-bar class="bar-stable">
-    <h1 class="title">Section Four of Four</h1>
-  </ion-header-bar>
-  <ion-content padding="10">
-    <button class="button button-block button-calm" ng-click="ctl.next()">
-      Continue
-    </button>
-  </ion-content>
-</ion-pane>
+<form role="form" name="ctl.formFour">
+  <ion-pane>
+    <ion-header-bar class="bar-stable">
+      <h1 class="title">Section Four of Four</h1>
+    </ion-header-bar>
+    <ion-content padding="10">
+      <p>Please answer the following questions to the best of your ability.
+        There is no penalty for wrong answers.
+      </p>
+
+      <div class="list card">
+        <div class="item item-divider">
+          Please type the following sentence<br/>
+        </div>
+        <label class="item item-input item-text-wrap item-stacked-label">
+          <strong>Darkness cannot drive out darkness; only light can do that.<strong>
+            <input type="text" ng-model="ctl.fourSentence" placeholder="Type here" required="required">
+        </label>
+      </div>
+
+      <div class="list card">
+        <div class="item item-divider">
+          Choose the option that best describes the image
+        </div>
+        <label class="item item-input item-text-wrap item-stacked-label">
+          <img src="img/pacman.svg" width="150" height="150"/>
+          <ion-radio ng-model="ctl.fourDrawing" ng-value="'realistic'" required="required">Realistic</ion-radio>
+          <ion-radio ng-model="ctl.fourDrawing" ng-value="'oppressive'" required="required">Oppressive</ion-radio>
+          <ion-radio ng-model="ctl.fourDrawing" ng-value="'indispensable'" required="required">Indispensable</ion-radio>
+          <ion-radio ng-model="ctl.fourDrawing" ng-value="'famous'" required="required">Famous</ion-radio>
+        </label>
+      </div>
+
+      <div class="list card">
+        <div class="item item-divider">
+          Please perform the following math operation
+        </div>
+        <label class="item item-input">
+          <span class="input-label">21 / 7 =</span>
+          <input type="text" ng-model="ctl.fourMath" placeholder="Type here" required="required">
+        </label>
+      </div>
+
+      <div class="list card">
+        <div class="item item-divider">
+          Which of the following statements is false?
+        </div>
+        <label class="item item-input item-text-wrap item-stacked-label">
+          <ion-radio ng-model="ctl.fourChoice" ng-value="'a'" required="required">Caesar was the name of a Roman emperor</ion-radio>
+          <ion-radio ng-model="ctl.fourChoice" ng-value="'b'" required="required">Humans need food to survive</ion-radio>
+          <ion-radio ng-model="ctl.fourChoice" ng-value="'c'" required="required">Earth's atmosphere is mostly made up of oxygen</ion-radio>
+          <ion-radio ng-model="ctl.fourChoice" ng-value="'d'" required="required">None of the above</ion-radio>
+        </label>
+      </div>
+
+      <div class="list card">
+        <div class="item item-divider">
+          Please type the letters of the alphabet in order<br/>
+        </div>
+        <label class="item item-input item-text-wrap item-stacked-label">
+          <input type="text" ng-model="ctl.fourWord" placeholder="Type here" required="required">
+        </label>
+      </div>
+
+      <button class="button button-block button-calm" ng-disabled="!ctl.canContinue()" ng-click="ctl.next()">
+        Continue
+      </button>
+    </ion-content>
+  </ion-pane>
+</form>

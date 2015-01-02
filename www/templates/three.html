@@ -1,10 +1,85 @@
-<ion-pane>
-  <ion-header-bar class="bar-stable">
-    <h1 class="title">Section Three of Four</h1>
-  </ion-header-bar>
-  <ion-content padding="10">
-    <button class="button button-block button-calm" ng-click="ctl.next()">
-      Continue
-    </button>
-  </ion-content>
-</ion-pane>
+<form role="form" name="ctl.formThree">
+  <ion-pane>
+    <ion-header-bar class="bar-stable">
+      <h1 class="title">Section Three of Four</h1>
+    </ion-header-bar>
+    <ion-content padding="10">
+      <p>Please answer the following questions to the best of your ability.
+        There is no penalty for wrong answers.
+      </p>
+
+      <div class="list card">
+        <div class="item item-divider">
+          Please type the following sentence<br/>
+        </div>
+        <label class="item item-input item-text-wrap item-stacked-label">
+          <strong>Only two things are infinite: the universe and human stupidity.<strong>
+            <input type="text" ng-model="ctl.threeSentence" placeholder="Type here" required="required">
+        </label>
+      </div>
+
+      <div class="list card">
+        <div class="item item-divider">
+          Choose the option that best describes the image
+        </div>
+        <label class="item item-input item-text-wrap item-stacked-label">
+          <img src="img/man.svg" width="150" height="150"/>
+          <ion-radio ng-model="ctl.threeDrawing" ng-value="'human'" required="required">Humanoid</ion-radio>
+          <ion-radio ng-model="ctl.threeDrawing" ng-value="'unrecognizable'" required="required">Difficult</ion-radio>
+          <ion-radio ng-model="ctl.threeDrawing" ng-value="'fat'" required="required">Obese</ion-radio>
+          <ion-radio ng-model="ctl.threeDrawing" ng-value="'impressive'" required="required">Impressive</ion-radio>
+        </label>
+      </div>
+
+      <div class="list card">
+        <div class="item item-divider">
+          Please perform the following math operation
+        </div>
+        <label class="item item-input">
+          <span class="input-label">5 &#215; 6 =</span>
+          <input type="text" ng-model="ctl.threeMath" placeholder="Type here" required="required">
+        </label>
+      </div>
+
+      <div class="list card">
+        <div class="item item-divider">
+          Which of the following statements do you prefer?
+        </div>
+        <label class="item item-input item-text-wrap item-stacked-label">
+          <ion-radio ng-model="ctl.threeChoice" ng-value="'a'" required="required">A stitch in time saves nine.</ion-radio>
+          <ion-radio ng-model="ctl.threeChoice" ng-value="'b'" required="required">Don't count your chickens before they
+            hatch.
+          </ion-radio>
+          <ion-radio ng-model="ctl.threeChoice" ng-value="'c'" required="required">A bird in the hand is worth two in the
+            bush.
+          </ion-radio>
+          <ion-radio ng-model="ctl.threeChoice" ng-value="'d'" required="required">Never look a gift horse in the mouth.
+          </ion-radio>
+        </label>
+      </div>
+
+      <div class="list card">
+        <div class="item item-divider">
+          Clap your hands seven times.
+        </div>
+      </div>
+
+      <div class="list card">
+        <div class="item item-divider">
+          Please type the twenty-first word in the following paragraph
+        </div>
+        <div class="item item-text-wrap">
+          <p>Four score and seven years ago our fathers brought forth on this continent, a new nation, conceived in
+            Liberty, and dedicated to the proposition that all men are created equal.</p>
+        </div>
+        <label class="item item-input item-text-wrap item-stacked-label">
+          <input type="text" ng-model="ctl.threeWord" placeholder="Type here" ng-required="true">
+        </label>
+      </div>
+
+      <button class="button button-block button-calm" ng-disabled="!ctl.canContinue()" ng-click="ctl.next()">
+        Continue
+      </button>
+    </ion-content>
+  </ion-pane>
+</form>

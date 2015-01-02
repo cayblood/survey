@@ -14,7 +14,7 @@
       </div>
       <label class="item item-input item-text-wrap item-stacked-label">
         <strong>The quick brown fox jumps over the lazy dog.<strong>
-          <input type="text" ng-model="oneSentence" placeholder="Type here" required="required">
+          <input type="text" ng-model="ctl.oneSentence" placeholder="Type here" required="required">
       </label>
     </div>
 
@@ -24,10 +24,10 @@
       </div>
       <label class="item item-input item-text-wrap item-stacked-label">
         <img src="img/star.svg" width="150" height="150"/>
-        <ion-radio ng-model="oneDrawing" ng-value="'square'" required="required">Square</ion-radio>
-        <ion-radio ng-model="oneDrawing" ng-value="'rectangle'" required="required">Rectangle</ion-radio>
-        <ion-radio ng-model="oneDrawing" ng-value="'star'" required="required">Star</ion-radio>
-        <ion-radio ng-model="oneDrawing" ng-value="'triangle'" required="required">Triangle</ion-radio>
+        <ion-radio ng-model="ctl.oneDrawing" ng-value="'square'" required="required">Square</ion-radio>
+        <ion-radio ng-model="ctl.oneDrawing" ng-value="'rectangle'" required="required">Rectangle</ion-radio>
+        <ion-radio ng-model="ctl.oneDrawing" ng-value="'star'" required="required">Star</ion-radio>
+        <ion-radio ng-model="ctl.oneDrawing" ng-value="'triangle'" required="required">Triangle</ion-radio>
       </label>
     </div>
 
@@ -37,7 +37,7 @@
       </div>
       <label class="item item-input">
         <span class="input-label">16 + 25 =</span>
-        <input type="text" ng-model="oneMath" placeholder="Type here" required="required">
+        <input type="text" ng-model="ctl.oneMath" placeholder="Type here" required="required">
       </label>
     </div>
 
@@ -46,10 +46,10 @@
         Which of the following statements is true?
       </div>
       <label class="item item-input item-text-wrap item-stacked-label">
-        <ion-radio ng-model="oneChoice" ng-value="'a'" required="required">1 + 1 = 3</ion-radio>
-        <ion-radio ng-model="oneChoice" ng-value="'b'" required="required">3 > 5</ion-radio>
-        <ion-radio ng-model="oneChoice" ng-value="'c'" required="required">5 > 3</ion-radio>
-        <ion-radio ng-model="oneChoice" ng-value="'d'" required="required">none of the above</ion-radio>
+        <ion-radio ng-model="ctl.oneChoice" ng-value="'a'" required="required">1 + 1 = 3</ion-radio>
+        <ion-radio ng-model="ctl.oneChoice" ng-value="'b'" required="required">3 > 5</ion-radio>
+        <ion-radio ng-model="ctl.oneChoice" ng-value="'c'" required="required">5 > 3</ion-radio>
+        <ion-radio ng-model="ctl.oneChoice" ng-value="'d'" required="required">none of the above</ion-radio>
       </label>
     </div>
 
@@ -76,7 +76,7 @@
           requires that they should declare the causes which impel them to the separation.</p>
       </div>
       <label class="item item-input item-text-wrap item-stacked-label">
-        <input type="text" ng-model="oneWord" placeholder="Type here" ng-required="true">
+        <input type="text" ng-model="ctl.oneWord" placeholder="Type here" ng-required="true">
       </label>
     </div>
 
